@@ -14,7 +14,7 @@ endif
 export TEXMFHOME ?= lsst-texmf/texmf
 
 #asp tex is a bit odd so latexml fails ..
-$(DOCNAME).pdf: $(tex) meta.tex local.bib authors.tex acronyms.tex
+$(DOCNAME).pdf: $(tex) meta.tex P920.bib authors.tex acronyms.tex
 	latex $(DOCNAME)
 	bibtex $(DOCNAME)
 	latex $(DOCNAME)
