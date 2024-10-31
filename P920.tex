@@ -59,7 +59,7 @@ The IVOA Simple Image Access version 2 protocol defines an easy way to provide c
 
 The Rubin Data Butler \citep{2022SPIE12189E..11J} consists of a metadata registry and a file datastore.
 The registry contains sufficient information to construct ObsCore records.
-Previously it was possible to provide an ObsCore table using two methods: export the records as CSV or Parquet files; provide live syncing to an ObsCore table using hooks in the registry backend.
+Previously it was possible to provide an ObsCore table using two methods: export the records as CSV or Parquet files; provide live syncing to an ObsCore table using hooks in the registry backend \citep{DMTN-236}.
 
 Both these approaches have been implemented by us and are the only way we have to provide an ObsTAP service. However, there are downsides.
 Whilst static export works fine for formal data releases where it can be integrated into our high performance Qserv database, it is not suitable for evolving datasets such at that from the nightly prompt products.
@@ -72,7 +72,7 @@ These two issues suggested that there would be a benefit from providing a simple
 \articlefigure{P920_f1.eps}{fig:arch}{Architecture diagram showing how the SIAv2 service interfaces with the Butler.}
 
 We used a layered approach to implementation as shown in Fig.\ \ref{fig:arch}.
-The service itself \citep{SQR-095} is written using Rubin's standard internal development platform Phalanx.
+The service itself \citep{SQR-095} is written using Rubin's standard internal development platform Phalanx.\footnote{https://phalanx.lsst.io}
 This provides us with our standard auth layer and deployment capabilities.
 
 The service takes the raw SIAv2 parameters and passes them, along with the SIAv2 configuration, to the \texttt{dax\_obscore}\footnote{\url{https://github.com/lsst-dm/dax_obscore}} library which parses the parameters, converts them to Butler queries, runs the queries, and returns the standarized results as an Astropy VOTable that can be packaged up by the service and returned.
