@@ -39,7 +39,7 @@
 
 
 \begin{abstract}
-The IVOA Simple Image Access version 2 protocol defines an easy way to provide community access to a collection of data. At the Vera C. Rubin Observatory we currently enable ObsTAP access to our data holdings via an ObsCore export or view of our Data Butler repositories. This approach does come with some deployment constraints, such as requiring pgsphere and compatibility with our CADC TAP implementation, so recently we decided to see whether we could instead provide an SIAv2 service that talks directly to our Data Butler. Here we describe our motivation, implementation strategies, and current deployment status, as well as discussing some metadata mismatches between the Butler data models and SIAv2.
+The IVOA Simple Image Access version 2 protocol defines an easy way to provide community access to a collection of data. At the Vera C.\ Rubin Observatory we currently enable ObsTAP access to our data holdings via an ObsCore export or view of our Data Butler repositories. This approach does come with some deployment constraints, such as requiring pgsphere and compatibility with our CADC TAP implementation, so recently we decided to see whether we could instead provide an SIAv2 service that talks directly to our Data Butler. Here we describe our motivation, implementation strategies, and current deployment status, as well as discussing some metadata mismatches between the Butler data models and SIAv2.
 \end{abstract}
 
 % These lines show examples of subject index entries. At this stage these have to commented
@@ -59,10 +59,11 @@ The IVOA Simple Image Access version 2 protocol defines an easy way to provide c
 
 The Rubin Data Butler \citep{2022SPIE12189E..11J} consists of a metadata registry and a file datastore.
 The registry contains sufficient information to construct ObsCore records.
-Previously it was possible to provide an ObsCore table using two methods: export the records as CSV or Parquet files; provide live syncing to an ObsCore table using hooks in the registry backend \citep{DMTN-236}.
+Previously it was possible to provide an ObsCore table using two methods: export the records as CSV or Parquet files and load them into a static database, or provide live syncing to an ObsCore table using hooks in the registry backend \citep{DMTN-236}.
 
-Both these approaches have been implemented by us and are the only way we have to provide an ObsTAP service. However, there are downsides.
-Whilst static export works fine for formal data releases where it can be integrated into our high performance Qserv database, it is not suitable for evolving datasets such at that from the nightly prompt products.
+Both these approaches have been implemented by us and are the only way we had to provide an ObsTAP service \citep{2017ivoa.spec.0509L}.
+However, there are downsides.
+Whilst static export works fine for formal data releases where it can be integrated into our high performance Qserv database \cite{C15_adassxxxii}, it is not suitable for evolving datasets such at that from the nightly prompt products.
 ``Live'' ObsCore does work but requires that the deployment has pgsphere available. Also, if the configuration changes (something that can happen a lot during early operations) the entire table needs to be rebuilt.
 
 These two issues suggested that there would be a benefit from providing a simpler, yet standardized, query layer directly on top of the Butler. The IVOA's Simple Image Access version 2 \citep[SIAv2;][]{2015ivoa.spec.1223D} was the obvious choice for this. Interfacing directly to the Butler provides much more flexibility since configuration changes can be picked up with a simple redeployment of the service and it can work immediately with any Butler repository.
