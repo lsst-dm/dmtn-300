@@ -8,3 +8,6 @@
 *.xdv
 *.dvi
 *.pdf
+authors.tex
+meta.tex
+acronyms.tex

@@ -38,4 +38,4 @@ jobs:
           LTD_PASSWORD: ${{ secrets.LTD_PASSWORD }}
           LTD_USERNAME: ${{ secrets.LTD_USERNAME }}
         run: |
-          lander --upload --pdf DMTN-300.pdf --ltd-product dmtn-300 --lsstdoc "DMTN-300.tex"
+          lander --upload --pdf P920.pdf --ltd-product dmtn-300 --lsstdoc "P920.tex" --author "Tim Jenness" --author "Stelios Voutsinas" --author "Gregory Dubois-Felsmann" --author "Andrei Salnikov" --abstract "The IVOA Simple Image Access version 2 protocol defines an easy way to provide community access to a collection of data. At the Vera C. Rubin Observatory we currently enable ObsTAP access to our data holdings via an ObsCore export or view of our Data Butler repositories. This approach does come with some deployment constraints, such as requiring pgsphere and compatibility with our CADC TAP implementation, so recently we decided to see whether we could instead provide an SIAv2 service that talks directly to our Data Butler. Here we describe our motivation, implementation strategies, and current deployment status, as well as discussing some metadata mismatches between the Butler data models and SIAv2."
